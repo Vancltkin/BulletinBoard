@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">BulletinBoard</string>
+    <!-- Menu drawer text -->
+    <!-- category 1 -->
+    <string name="ad_category">Объявления</string>
+    <string name="ad_my_ads">Мои объявления</string>
+    <string name="ad_car">Машины</string>
+    <string name="ad_pc">Компьютеры</string>
+    <string name="ad_smartphone">Смартфоны</string>
+    <string name="ad_dm">Бытовая техника</string>
+    <!-- category 2 -->
+    <string name="ac_category">Аккаунт</string>
+    <string name="ac_sign_up">Регистрация</string>
+    <string name="ac_sign_in">Вход</string>
+    <string name="ac_sign_out">Выход</string>
+    <!-- Sign Dialog -->
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_action">Войти</string>
+    <string name="sign_up_action">Зарегестрироваться</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="sign_up_error">Неудалось зарегистрироваться</string>
+    <string name="send_verification_email_error">Неудалось отправить email для подтверждения!</string>
+    <string name="send_verification_email_done">На вашу почту было отправленно письмо для подтверждения аккаунта!</string>
+    <!-- other -->
+    <string name="open">Открыть</string>
+    <string name="close">Закрыть</string>
+</resources>

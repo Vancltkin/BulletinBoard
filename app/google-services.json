@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "842020224717",
+    "project_id": "bulletinboardfinish",
+    "storage_bucket": "bulletinboardfinish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842020224717:android:6a6f8d6e6ad2c66811f384",
+        "android_client_info": {
+          "package_name": "com.vanclykin.bulletinboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842020224717-h03nn5pvs2rt8es5cncsv0vn8up10qn0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjnIQgB1Bu4mVj2YI5RugSO7U5RHsxQkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842020224717-h03nn5pvs2rt8es5cncsv0vn8up10qn0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
