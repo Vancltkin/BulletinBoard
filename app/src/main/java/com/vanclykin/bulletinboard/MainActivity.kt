@@ -1,19 +1,28 @@
 package com.vanclykin.bulletinboard
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseUser
 import com.vanclykin.bulletinboard.databinding.ActivityMainBinding
 import com.vanclykin.bulletinboard.dialoghelper.DialogConst
 import com.vanclykin.bulletinboard.dialoghelper.DialogHelper
+import com.vanclykin.bulletinboard.dialoghelper.GoogleAccConst
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var tvAccount: TextView
     lateinit var binding: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
     val mAuth = FirebaseAuth.getInstance()
@@ -25,12 +34,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         init()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                if (account != null){
+                    dialogHelper.accHelper.signInFirebaseWithGoogle(account.idToken!!)
+                }
+            }catch (e:Exception){
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        uiUpdate(mAuth.currentUser)
+    }
+
     private fun init() {
         val toggle =
-            ActionBarDrawerToggle(this, binding.drawerLayout, binding.mainContent.toolbar, R.string.open, R.string.close)
+            ActionBarDrawerToggle(
+                this,
+                binding.drawerLayout,
+                binding.mainContent.toolbar,
+                R.string.open,
+                R.string.close
+            )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)
+        tvAccount = binding.navView.getHeaderView(0).findViewById(R.id.tvAccountEmail)
 
     }
 
@@ -58,11 +94,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 dialogHelper.createSignDialog(DialogConst.SIGN_IN_STATE)
             }
             R.id.id_sign_out -> {
-                Toast.makeText(this, "${item.title}", Toast.LENGTH_SHORT).show()
+                uiUpdate(null)
+                mAuth.signOut()
             }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun uiUpdate(user: FirebaseUser?) {
+        tvAccount.text = if (user == null) {
+            resources.getString(R.string.not_reg)
+        } else {
+            user.email
+        }
+
     }
 
 }

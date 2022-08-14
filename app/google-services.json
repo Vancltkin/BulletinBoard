@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "842020224717-m2eclrs5j028l2ob8nbrtd3jeqis3ks0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vanclykin.bulletinboard",
+            "certificate_hash": "9571e9f839114747b83ad1bf52579dd99dc536bd"
+          }
+        },
+        {
           "client_id": "842020224717-h03nn5pvs2rt8es5cncsv0vn8up10qn0.apps.googleusercontent.com",
           "client_type": 3
         }

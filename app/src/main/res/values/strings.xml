@@ -14,14 +14,19 @@
     <string name="ac_sign_in">Вход</string>
     <string name="ac_sign_out">Выход</string>
     <!-- Sign Dialog -->
+    <string name="email_reset_password_was_sent">Письмо для сброса пароля было отправлено</string>
+    <string name="dialog_reset_email_password">Для восстановления пароля пожалуйста введите ваш email адрес</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="sign_in_action">Войти</string>
     <string name="sign_up_action">Зарегестрироваться</string>
-    <string name="forget_password">Забыли пароль?</string>
+    <string name="forget_password">Забыл пароль</string>
     <string name="sign_up_error">Неудалось зарегистрироваться</string>
-    <string name="send_verification_email_error">Неудалось отправить email для подтверждения!</string>
+    <string name="sign_in_error">Неудалось войти</string>
+    <string name="send_verification_email_error">Неудалось отправить письмо для подтверждения!</string>
     <string name="send_verification_email_done">На вашу почту было отправленно письмо для подтверждения аккаунта!</string>
+    <string name="not_reg">Войдите или зарегистрируйтесь</string>
+    <string name="google_sign_in_done">Вход выполнен</string>
     <!-- other -->
     <string name="open">Открыть</string>
     <string name="close">Закрыть</string>
