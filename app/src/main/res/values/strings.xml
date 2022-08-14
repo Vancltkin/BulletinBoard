@@ -20,14 +20,20 @@
     <string name="password_hint">Password</string>
     <string name="sign_in_action">Войти</string>
     <string name="sign_up_action">Зарегестрироваться</string>
-    <string name="forget_password">Забыл пароль</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="forget_password_text">Восстановить</string>
+    <string name="forget_password_title">Восстановление пароля</string>
     <string name="sign_up_error">Неудалось зарегистрироваться</string>
     <string name="sign_in_error">Неудалось войти</string>
     <string name="send_verification_email_error">Неудалось отправить письмо для подтверждения!</string>
     <string name="send_verification_email_done">На вашу почту было отправленно письмо для подтверждения аккаунта!</string>
     <string name="not_reg">Войдите или зарегистрируйтесь</string>
     <string name="google_sign_in_done">Вход выполнен</string>
+    <string name="link_done">Email успешно подключен к Google аккаунту</string>
+    <string name="enter_to_gmail">Вы уже зарегестрированы. Для привязки Email. Войдите в Google аккаунт и повторите регистрицию по Email</string>
+
     <!-- other -->
     <string name="open">Открыть</string>
     <string name="close">Закрыть</string>
+
 </resources>

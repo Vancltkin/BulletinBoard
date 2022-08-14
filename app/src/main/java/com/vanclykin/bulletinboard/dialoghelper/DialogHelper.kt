@@ -27,6 +27,7 @@ class DialogHelper(activity: MainActivity) {
         }
         binding.btGoogleSignIn.setOnClickListener {
             accHelper.signInWithGoogle()
+            dialog.dismiss()
         }
         dialog.show() //показать
     }
@@ -45,9 +46,12 @@ class DialogHelper(activity: MainActivity) {
                 }
             dialog?.dismiss()
         } else {
+            binding.tvSignTitle.text = activity.resources.getString(R.string.forget_password_title)
             binding.tvDialogMessage.visibility = View.VISIBLE
+            binding.btForgetPass.text =  activity.resources.getString(R.string.forget_password_text)
             binding.btSignUpIn.visibility = View.GONE
             binding.btGoogleSignIn.visibility = View.GONE
+            binding.edSignPassword.visibility = View.GONE
         }
     }
 

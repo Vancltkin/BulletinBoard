@@ -3,6 +3,7 @@ package com.vanclykin.bulletinboard
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.vanclykin.bulletinboard.act.EditAdsActivity
 import com.vanclykin.bulletinboard.databinding.ActivityMainBinding
 import com.vanclykin.bulletinboard.dialoghelper.DialogConst
 import com.vanclykin.bulletinboard.dialoghelper.DialogHelper
@@ -23,7 +25,7 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var tvAccount: TextView
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
     val mAuth = FirebaseAuth.getInstance()
 
@@ -32,6 +34,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { //ошибка
+        if (item.itemId == R.id.id_new_ads){
+            val i = Intent(this,EditAdsActivity::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,6 +71,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun init() {
+        setSupportActionBar(binding.mainContent.toolbar)
+
         val toggle =
             ActionBarDrawerToggle(
                 this,
@@ -96,6 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.id_sign_out -> {
                 uiUpdate(null)
                 mAuth.signOut()
+                dialogHelper.accHelper.signOutWithGoogle()
             }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
