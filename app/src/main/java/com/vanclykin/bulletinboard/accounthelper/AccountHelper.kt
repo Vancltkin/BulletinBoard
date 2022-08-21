@@ -11,8 +11,7 @@ import com.vanclykin.bulletinboard.R
 import com.vanclykin.bulletinboard.constants.FirebaseAuthConstants
 import com.vanclykin.bulletinboard.dialoghelper.GoogleAccConst
 
-class AccountHelper(activity: MainActivity) {
-    private val activity = activity
+class AccountHelper(private val activity: MainActivity) {
     private lateinit var signInClient: GoogleSignInClient
 
     fun signUpWithEmail(email: String, password: String) {

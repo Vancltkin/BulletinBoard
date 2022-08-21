@@ -8,8 +8,7 @@ import com.vanclykin.bulletinboard.R
 import com.vanclykin.bulletinboard.accounthelper.AccountHelper
 import com.vanclykin.bulletinboard.databinding.SignDialogBinding
 
-class DialogHelper(activity: MainActivity) {
-    private val activity = activity
+class DialogHelper(private val activity: MainActivity) {
     val accHelper = AccountHelper(activity)
 
     fun createSignDialog(index: Int) {                                                                          //пояснительную бригаду

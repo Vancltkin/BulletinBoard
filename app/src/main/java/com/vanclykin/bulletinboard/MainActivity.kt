@@ -2,7 +2,6 @@ package com.vanclykin.bulletinboard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -10,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.fxn.pix.Pix
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
@@ -20,7 +20,6 @@ import com.vanclykin.bulletinboard.databinding.ActivityMainBinding
 import com.vanclykin.bulletinboard.dialoghelper.DialogConst
 import com.vanclykin.bulletinboard.dialoghelper.DialogHelper
 import com.vanclykin.bulletinboard.dialoghelper.GoogleAccConst
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,8 +36,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean { //ошибка
-        if (item.itemId == R.id.id_new_ads){
-            val i = Intent(this,EditAdsActivity::class.java)
+        if (item.itemId == R.id.id_new_ads) {
+            val i = Intent(this, EditAdsActivity::class.java)
             startActivity(i)
         }
         return super.onOptionsItemSelected(item)
@@ -46,19 +45,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu,menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE){
+        if (requestCode == GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                if (account != null){
+                if (account != null) {
                     dialogHelper.accHelper.signInFirebaseWithGoogle(account.idToken!!)
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
         }
