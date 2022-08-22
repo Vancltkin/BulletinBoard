@@ -11,10 +11,12 @@ import com.fxn.utility.PermUtil
 import com.vanclykin.bulletinboard.R
 import com.vanclykin.bulletinboard.databinding.ActivityEditAdsBinding
 import com.vanclykin.bulletinboard.dialogs.DialogSpinnerHelper
+import com.vanclykin.bulletinboard.fragment.FragmentCloseInterface
+import com.vanclykin.bulletinboard.fragment.ImageListFrag
 import com.vanclykin.bulletinboard.utils.CityHelper
 import com.vanclykin.bulletinboard.utils.ImagePicker
 
-class EditAdsActivity : AppCompatActivity() {
+class EditAdsActivity : AppCompatActivity(), FragmentCloseInterface {
     lateinit var binding: ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()
 
@@ -30,8 +32,15 @@ class EditAdsActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_IMAGES)
             if (data != null) {
-                val returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
+                val returnValues = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
+                if (returnValues?.size!! > 1) {
+                    binding.ScrollViewMain.visibility = View.GONE
+                    val fm = supportFragmentManager.beginTransaction()
+                    fm.replace(R.id.placeHolder, ImageListFrag(this,returnValues))
+                    fm.commit()
+                }
             }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -42,7 +51,7 @@ class EditAdsActivity : AppCompatActivity() {
         when (requestCode) {
             PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ImagePicker.getImages(this)
+                    ImagePicker.getImages(this, 3)
                 } else {
                     Toast.makeText(
                         this@EditAdsActivity,
@@ -81,7 +90,12 @@ class EditAdsActivity : AppCompatActivity() {
     }
 
     fun onClickGetImages(view: View) {
-        ImagePicker.getImages(this)
+        ImagePicker.getImages(this, 3)
+
+    }
+
+    override fun onFragClose() {
+        binding.ScrollViewMain.visibility = View.VISIBLE
     }
 
 }
