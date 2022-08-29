@@ -30,7 +30,7 @@ class EditAdsActivity : AppCompatActivity(), FragmentCloseInterface {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_IMAGES)
+        if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_IMAGES)
             if (data != null) {
                 val returnValues = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
                 if (returnValues?.size!! > 1) {

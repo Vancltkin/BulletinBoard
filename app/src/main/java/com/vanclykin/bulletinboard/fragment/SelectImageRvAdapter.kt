@@ -8,8 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vanclykin.bulletinboard.R
+import com.vanclykin.bulletinboard.utils.ItemTouchMoveCallback
 
-class SelectImageRvAdapter : RecyclerView.Adapter<SelectImageRvAdapter.ImageHolder>() {
+class SelectImageRvAdapter : RecyclerView.Adapter<SelectImageRvAdapter.ImageHolder>(), ItemTouchMoveCallback.ItemTouchAdapter {
     private val mainArray = ArrayList<SelectImageItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageHolder {
@@ -23,6 +24,13 @@ class SelectImageRvAdapter : RecyclerView.Adapter<SelectImageRvAdapter.ImageHold
 
     override fun getItemCount(): Int {
         return mainArray.size
+    }
+
+    override fun onMove(startPos: Int, targetPos: Int) { // перенос в массиве
+        val targetItem = mainArray[targetPos] //сохранение элемента
+        mainArray[targetPos] = mainArray[startPos]
+        mainArray[startPos] = targetItem
+        notifyItemMoved(startPos, targetPos)
     }
 
     class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
