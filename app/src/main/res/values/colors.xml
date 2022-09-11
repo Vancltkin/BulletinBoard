@@ -10,4 +10,6 @@
     <color name="green_light">#63FF69</color>
     <color name="teal_light">#ADFFF7</color>
     <color name="green_v2">#FFABFBAD</color>
+    <color name="white_dark">#EBEBEB</color>
+
 </resources>

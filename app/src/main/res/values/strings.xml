@@ -38,11 +38,12 @@
     <string name="no_result">Нет результата</string>
     <string name="no_country">Не выбрана страна</string>
 
-
-
     <!-- Edit activity -->
     <string name="select_country">*Выберите страну</string>
     <string name="select_city">*Выберите город</string>
+
+    <!-- Progress -->
+    <string name="loading">Загрузка… Пожалуйста, подождите…</string>
 
 
 </resources>

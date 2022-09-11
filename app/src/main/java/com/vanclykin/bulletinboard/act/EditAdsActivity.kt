@@ -2,7 +2,9 @@ package com.vanclykin.bulletinboard.act
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,13 +17,14 @@ import com.vanclykin.bulletinboard.dialogs.DialogSpinnerHelper
 import com.vanclykin.bulletinboard.fragment.FragmentCloseInterface
 import com.vanclykin.bulletinboard.fragment.ImageListFrag
 import com.vanclykin.bulletinboard.utils.CityHelper
+import com.vanclykin.bulletinboard.utils.ImageManager
 import com.vanclykin.bulletinboard.utils.ImagePicker
 
 class EditAdsActivity : AppCompatActivity(), FragmentCloseInterface {
-    private var chooseImageFrag: ImageListFrag? = null
+    var chooseImageFrag: ImageListFrag? = null
     lateinit var binding: ActivityEditAdsBinding
     private var dialog = DialogSpinnerHelper()
-    private lateinit var imageAdapter: ImageAdapter
+    lateinit var imageAdapter: ImageAdapter
     var editImagePos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,38 +36,9 @@ class EditAdsActivity : AppCompatActivity(), FragmentCloseInterface {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_IMAGES) {
-
-            if (data != null) {
-
-                val returnValues = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-
-                if (returnValues?.size!! > 1 && chooseImageFrag == null) {
-
-                    openChooseImageFrag(returnValues)
-
-                } else if (returnValues.size == 1 && chooseImageFrag == null) {
-
-                    imageAdapter.update(returnValues)
-
-                } else if (chooseImageFrag != null) {
-
-                    chooseImageFrag?.updateAdapter(returnValues)
-
-                }
-            }
-
-        } else if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_GET_SINGLE_IMAGES){
-
-            if (data != null) {
-
-                val uris = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)
-                chooseImageFrag?.setSingleImage(uris?.get(0)!!,editImagePos)
-            }
-        }
+        ImagePicker.showSelectedImages(resultCode,requestCode,data,this)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -123,19 +97,20 @@ class EditAdsActivity : AppCompatActivity(), FragmentCloseInterface {
 
         } else {
 
-            openChooseImageFrag(imageAdapter.mainArray)
+            openChooseImageFrag(null)
+            chooseImageFrag?.updateAdapterFromEdit(imageAdapter.mainArray)
         }
 
     }
 
-    override fun onFragClose(list: ArrayList<String>) {
+    override fun onFragClose(list: ArrayList<Bitmap>) {
 
         binding.ScrollViewMain.visibility = View.VISIBLE
         imageAdapter.update(list)
         chooseImageFrag = null
     }
 
-    private fun  openChooseImageFrag (newList: ArrayList<String>){
+    fun  openChooseImageFrag (newList: ArrayList<String>?){
 
         chooseImageFrag = ImageListFrag(this, newList)
         binding.ScrollViewMain.visibility = View.GONE
